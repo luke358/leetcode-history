@@ -24,3 +24,25 @@ function getPath(root, targetSum) {
 	}
 	return getPath(root.left, targetSum - root.val) || getPath(root.right, targetSum - root.val);
 }
+
+// 小小队列 可笑可笑
+var hasPathSum = function (root, targetSum) {
+	if (!root) return false;
+	let path = [root.val]; // 保存答案
+	let queue = [root]; // 保存当前节点
+
+	while (queue.length) {
+		let cur = queue.shift();
+		let curSum = path.shift();
+		if (curSum === targetSum && !cur.left && !cur.right) return true;
+		if (cur.left) {
+			queue.push(cur.left);
+			path.push(+curSum + +cur.left.val)
+		}
+		if (cur.right) {
+			queue.push(cur.right);
+			path.push(+curSum + +cur.right.val)
+		}
+	}
+	return false;
+};
