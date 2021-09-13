@@ -37,3 +37,31 @@ function compare(left, right) {
 
 	return outside && inside;
 }
+
+// 迭代
+
+var isSameTree = function (p, q) {
+	if (!p && !q) return true;
+	if (!p || !q) return false;
+
+	let queue = [p, q];
+
+	while (queue.length) {
+		// 左边的出来
+		let l = queue.shift();
+		// 右边的出来
+		let r = queue.shift();
+		// 如果左右都不存在 就继续从 queue 里面取数据
+		if (!l && !r) continue;
+
+		// 如果 l 或 r 有一个不存在 或者 两个的值不相等 都返回 false
+		if (!l || !r || (l.val !== r.val)) return false;
+
+		queue.push(l.left)
+		queue.push(r.left)
+		queue.push(l.right)
+		queue.push(r.right)
+	}
+
+	return true;
+};
