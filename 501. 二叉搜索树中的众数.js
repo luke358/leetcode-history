@@ -32,3 +32,36 @@ var findMode = function (root) {
 
 	return res;
 };
+
+
+var findMode = function (root) {
+	let count = 0;
+	let maxCount = 0;
+	let pre = null;
+	let res = []
+	const searchBST = (root) => {
+		if (!root) return;
+
+		searchBST(root.left);
+
+		if (!pre) {
+			count = 1;
+		} else if (pre.val === root.val) {
+			count++;
+		} else {
+			count = 1;
+		}
+		pre = root;
+		if (count === maxCount) {
+			res.push(root.val)
+		}
+		if (count > maxCount) {
+			maxCount = count
+			res = [root.val];
+		}
+		searchBST(root.right);
+	}
+	searchBST(root);
+
+	return res;
+};
