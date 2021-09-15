@@ -23,3 +23,20 @@ var insertIntoBST = function (root, val) {
 	}
 	return root;
 };
+
+// 迭代版本
+var insertIntoBST = function (root, val) {
+	if (!root) {
+		return new TreeNode(val);
+	}
+	let cur = root;
+	let pre = root
+	while (cur) {
+		pre = cur;
+		if (cur.val > val) cur = cur.left;
+		else cur = cur.right;
+	}
+	if (val > pre.val) pre.right = new TreeNode(val);
+	else pre.left = new TreeNode(val);
+	return root;
+};
