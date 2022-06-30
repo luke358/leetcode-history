@@ -50,7 +50,7 @@ var threeSum = function (nums) {
           right--;
         }
         left++;
-        right++;
+        right--;
       }
     }
   }
